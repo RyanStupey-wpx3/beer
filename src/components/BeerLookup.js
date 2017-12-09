@@ -47,7 +47,7 @@ class BeerLookup extends Component {
 
         return (
             <div className="SearchBox">
-                <InputBox value={this.state.userInput} className="input" onChange={e => this.updateInput(e.target.value)}/>
+                <InputBox placeholder="Beer Name" value={this.state.userInput} className="input" onChange={e => this.updateInput(e.target.value)}/>
                 {/* <button onClick={() => this.getBeer()}>Pour</button> */}
                 <PourButton click={this.getBeer()} />
 

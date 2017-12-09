@@ -71,5 +71,26 @@ button {
 .beerLabel {
     display: block;
     margin: 20px auto;
+}
 
+.Textarea {
+    line-height: 30px;
+    padding: 5px 10px;
+    font-size: 14px;
+    width: 300px;
+    border: 2px solid #333;
+    display: block;
+    margin: 0 auto;
+}
+
+input::placeholder {
+    text-align: center
+}
+
+.light {
+    font-weight: 300;
+}
+
+.text-left {
+    text-align: left;
 }

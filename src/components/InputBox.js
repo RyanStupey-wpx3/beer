@@ -7,7 +7,7 @@ class InputBox extends Component {
     render(){
         return (
             <div className="SearchBox">
-                <input className="input" value={this.props.value} onChange={this.props.onChange}/>
+                <input placeholder={this.props.placeholder} value={this.props.val} className="input" onChange={this.props.onChange}/>
             </div>
         )
     }
