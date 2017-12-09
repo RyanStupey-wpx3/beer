@@ -34,7 +34,6 @@ a {
 .beerLookup {
     flex:1;
     min-height: calc(100vh - 100px);
-    border-left: 1px solid black;
     padding: 20px;
 }
 

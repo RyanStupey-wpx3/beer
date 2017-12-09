@@ -12,7 +12,6 @@ module.exports = {
         })
         id++;
         res.json(beers);
-
     },
 
     read(req, res){
@@ -20,7 +19,6 @@ module.exports = {
     },
 
     update(req, res){
-        console.log(req.body);
         const beerId = req.body.id;
         const index = beers.findIndex(beer => beer.id == parseInt(beerId, 10))
         beers[index] = {

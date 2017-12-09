@@ -40,8 +40,6 @@ class BeerList extends Component {
             notes: this.state.beerNotes
         };
         if(this.state.update){
-            console.log('update beer');
-
             axios.put( `http://localhost:3535/api/mybeers/:id`, body)
             .then( response => {
                 this.setState({
@@ -54,7 +52,6 @@ class BeerList extends Component {
             })
             }).catch(err => console.log('Error: ' + err));
         } else {
-            console.log('add beer');
             axios.post( `http://localhost:3535/api/mybeers`, body)
             .then( response => {
                 this.setState({
@@ -94,7 +91,7 @@ class BeerList extends Component {
             } else if(this.state.beers.length === 1){
                 return <h3 key={i}>{beer.name}</h3>
             } else {
-                return
+                return '';
             }
         });
         return (
