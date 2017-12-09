@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import SearchBox from './components/SearchBox'
+import Logo from './components/Logo';
+import SearchBox from './components/SearchBox';
+import BeerList from './components/BeerList';
 
 class App extends Component {
     constructor(){
@@ -13,19 +15,19 @@ class App extends Component {
 
     componentDidMount(){
 
-
     }
 
   render() {
     return (
         <div className="App">
             <header className="App-header">
-                <h1><i className="fa fa-beer"></i> Beer Me</h1>
+                <Logo />
             </header>
 
             <div className="wrapper">
                 <div className="userList">
                     <h1>My Beers</h1>
+                    <BeerList />
                 </div>
                 <div className="beerLookup">
                     <h1>Beer Lookup</h1>
