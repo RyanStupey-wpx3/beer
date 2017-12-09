@@ -10,13 +10,16 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/api/test', controller.test);
+app.get('/api/mybeers', controller.read);
+app.post('/api/mybeers', controller.create);
+app.put('/api/mybeers/:id', controller.update);
+app.delete('/api/mybeers/:id', controller.delete);
 
 
 // External API Passthrough
 app.get('/api/beer/:name', (req, res) => {
     axios.get(`https://api.brewerydb.com/v2/beers/?name=${req.params.name}&withBreweries=Y&key=${process.env.BING_KEY}`)
-    .then( response => res.json(response.data) ).catch(console.log);
+    .then( response => res.json(response.data) ).catch(err => console.log('Error: ' + err));
 })
 
 

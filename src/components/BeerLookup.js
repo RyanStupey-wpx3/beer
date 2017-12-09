@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import InputBox from './InputBox';
+import PourButton from './PourButton';
 
 class BeerLookup extends Component {
     constructor(){
@@ -39,8 +40,7 @@ class BeerLookup extends Component {
                 this.setState({ name: 'Beer not found' })
             }
 
-
-        }).catch(console.log);
+        }).catch(err => console.log('Error: ' + err));
     }
 
     render(){
@@ -48,7 +48,8 @@ class BeerLookup extends Component {
         return (
             <div className="SearchBox">
                 <InputBox value={this.state.userInput} className="input" onChange={e => this.updateInput(e.target.value)}/>
-                <button onClick={() => this.getBeer()}>Pour</button>
+                {/* <button onClick={() => this.getBeer()}>Pour</button> */}
+                <PourButton click={this.getBeer()} />
 
                 <div className="displayResults">
                     <h2>{this.state.name} <small>{this.state.abv}</small></h2>

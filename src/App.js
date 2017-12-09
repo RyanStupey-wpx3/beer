@@ -5,17 +5,7 @@ import BeerLookup from './components/BeerLookup';
 import BeerList from './components/BeerList';
 
 class App extends Component {
-    constructor(){
-        super();
-        this.state = {
-            picture: '',
-        }
-    }
 
-
-    componentDidMount(){
-
-    }
 
   render() {
     return (
