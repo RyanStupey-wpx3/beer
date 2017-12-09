@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Logo from './components/Logo';
-import SearchBox from './components/SearchBox';
+import BeerLookup from './components/BeerLookup';
 import BeerList from './components/BeerList';
 
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
                 </div>
                 <div className="beerLookup">
                     <h1>Beer Lookup</h1>
-                    <SearchBox />
+                    <BeerLookup />
                 </div>
             </div>
 

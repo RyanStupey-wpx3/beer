@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import InputBox from './InputBox';
 
 class BeerList extends Component {
     constructor(){

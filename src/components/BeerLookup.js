@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import InputBox from './InputBox';
 
-class SearchBox extends Component {
+class BeerLookup extends Component {
     constructor(){
         super();
         this.state = {
@@ -23,26 +24,30 @@ class SearchBox extends Component {
     getBeer(){
 
         axios.get(`http://localhost:3535/api/beer/${this.state.userInput}`).then(response => {
-            let {name, description, abv, labels, breweries} = response.data.data[0];
+            if(response.data.hasOwnProperty('data')){
+                let {name, description, abv, labels, breweries} = response.data.data[0];
+                this.setState({
+                    userInput: '',
+                    name: name,
+                    description: description,
+                    abv: abv,
+                    image: labels.medium,
+                    brewery: breweries[0].name,
+                    website: breweries[0].website
+                })
+            } else {
+                this.setState({ name: 'Beer not found' })
+            }
 
-            console.log(breweries);
 
-            this.setState({
-                userInput: '',
-                name: name,
-                description: description,
-                abv: abv,
-                image: labels.medium,
-                brewery: breweries[0].name,
-                website: breweries[0].website
-            })
         }).catch(console.log);
     }
 
     render(){
+
         return (
             <div className="SearchBox">
-                <input value={this.state.userInput} className="input" onChange={e => this.updateInput(e.target.value)}/>
+                <InputBox value={this.state.userInput} className="input" onChange={e => this.updateInput(e.target.value)}/>
                 <button onClick={() => this.getBeer()}>Pour</button>
 
                 <div className="displayResults">
@@ -52,10 +57,9 @@ class SearchBox extends Component {
                     <img alt="" src={this.state.image} className="beerLabel" />
                 </div>
 
-
             </div>
         )
     }
 }
 
-export default SearchBox
+export default BeerLookup
