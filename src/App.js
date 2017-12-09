@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
+import SearchBox from './components/SearchBox'
 
 class App extends Component {
     constructor(){
@@ -12,23 +12,28 @@ class App extends Component {
 
 
     componentDidMount(){
-        // axios.get('http://localhost:3535/api/testt').then(response => {
-        //     // console.log(response.data);
-        // })
+
 
     }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={this.state.picture} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <div className="App">
+            <header className="App-header">
+                <h1><i className="fa fa-beer"></i> Beer Me</h1>
+            </header>
+
+            <div className="wrapper">
+                <div className="userList">
+                    <h1>My Beers</h1>
+                </div>
+                <div className="beerLookup">
+                    <h1>Beer Lookup</h1>
+                    <SearchBox />
+                </div>
+            </div>
+
+        </div>
     );
   }
 }

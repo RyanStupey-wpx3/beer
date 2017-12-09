@@ -13,10 +13,10 @@ app.use(cors());
 app.get('/api/test', controller.test);
 
 
-app.get('/api/testt', (req, res) => {
-    // axios.get(`https://api.brewerydb.com/v2/beer/oeGSxs?key=${process.env.BING_KEY}`).then(response => {
-    //     console.log(response.data);
-    // })
+app.get('/api/beer/:name', (req, res) => {
+    axios.get(`https://api.brewerydb.com/v2/beers/?name=${req.params.name}&withBreweries=Y&key=${process.env.BING_KEY}`).then(response => {
+        res.json(response.data);
+    }).catch(console.log);
 })
 
 
