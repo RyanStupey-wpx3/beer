@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class TextBox extends Component {
-    render(){
-        return (
-            <div>
-                <textarea onChange={this.props.onChange} placeholder={this.props.placeholder} className="Textarea" value={this.props.val}></textarea>
-            </div>
-        )
-    }
+const TextBox = (props) => {
+    return (
+        <div>
+            <textarea
+                className="TextBox"
+                onChange={props.onChange}
+                placeholder={props.placeholder}
+                value={props.val}></textarea>
+        </div>
+    )
 }
 
 export default TextBox

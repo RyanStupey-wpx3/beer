@@ -1,11 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class PourButton extends Component {
-    render(){
-        return (
-            <button onClick={this.props.click}>Pour</button>
-        )
-    }
-}
+const PourButton = (props) => <button onClick={props.click}>Pour</button>;
 
 export default PourButton

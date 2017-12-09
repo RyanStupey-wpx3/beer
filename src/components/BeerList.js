@@ -3,6 +3,7 @@ import axios from 'axios';
 import InputBox from './InputBox';
 import PourButton from './PourButton';
 import TextBox from './TextBox';
+import Rating from './Rating';
 
 class BeerList extends Component {
     constructor(){
@@ -17,11 +18,14 @@ class BeerList extends Component {
         }
     }
 
+    // Initial load of beer list
     componentDidMount(){
         axios.get( `http://localhost:3535/api/mybeers` )
-        .then( response => { this.setState({ beers: response.data }) }).catch(err => console.log('Error: ' + err));
+        .then( response => { this.setState({ beers: response.data }) })
+        .catch(err => console.log('Error: ' + err));
     }
 
+    //Update state on user input
     updateInput(val){
         this.setState({ beerName: val })
     }
@@ -32,6 +36,7 @@ class BeerList extends Component {
         this.setState({ beerNotes: val })
     }
 
+    //Update Beer List
     addBeer(){
         let body = {
             id: this.state.beerId,
@@ -39,33 +44,39 @@ class BeerList extends Component {
             rating: this.state.beerRating,
             notes: this.state.beerNotes
         };
+
+        //Update existing beer
         if(this.state.update){
             axios.put( `http://localhost:3535/api/mybeers/:id`, body)
             .then( response => {
                 this.setState({
-                beers: response.data,
-                beerId: '',
-                beerName: '',
-                beerRating: '',
-                beerNotes: '',
-                update: false
-            })
+                    beers: response.data,
+                    beerId: '',
+                    beerName: '',
+                    beerRating: '',
+                    beerNotes: '',
+                    update: false
+                })
             }).catch(err => console.log('Error: ' + err));
         } else {
-            axios.post( `http://localhost:3535/api/mybeers`, body)
-            .then( response => {
-                this.setState({
-                beers: response.data,
-                beerId: '',
-                beerName: '',
-                beerRating: '',
-                beerNotes: '',
-                update: false
-            })
-            }).catch(err => console.log('Error: ' + err));
+            //Add new beer (Name must exist)
+            if(this.state.beerName){
+                axios.post( `http://localhost:3535/api/mybeers`, body)
+                .then( response => {
+                    this.setState({
+                        beers: response.data,
+                        beerId: '',
+                        beerName: '',
+                        beerRating: '',
+                        beerNotes: '',
+                        update: false
+                    })
+                }).catch(err => console.log('Error: ' + err));
+            }
         }
     }
 
+    //Load existing stats into state to prefill for edit
     updateBeer(id, name,rating,notes){
         this.setState({
             beerId: id,
@@ -77,7 +88,9 @@ class BeerList extends Component {
     }
 
     render(){
+        //Prepare beer entries for display
         let list = this.state.beers.map((beer,i) => {
+            //If more than default 'Add beer to your list' entry, return each entry that is not the 'add' message
             if(this.state.beers.length > 1 && i > 0){
                 return (
                     <div key={i}>
@@ -89,24 +102,32 @@ class BeerList extends Component {
                     </div>
                 )
             } else if(this.state.beers.length === 1){
+                //If only default msg exists, display msg
                 return <h3 key={i}>{beer.name}</h3>
             } else {
+                //Else present for msg skip when entries are present
                 return '';
             }
         });
+
         return (
             <div>
-                <InputBox placeholder="Beer Name" val={this.state.beerName} className="input" onChange={e => this.updateInput(e.target.value)} />
+                <InputBox
+                    className="input"
+                    placeholder="Beer Name"
+                    val={this.state.beerName}
+                    onChange={e => this.updateInput(e.target.value)} />
                 <br/>
-                <TextBox onChange={e => this.updateNotes(e.target.value)} placeholder="Notes about this beer...." className="Textarea" val={this.state.beerNotes} />
+
+                <TextBox
+                    onChange={e => this.updateNotes(e.target.value)}
+                    placeholder="Notes about this beer...."
+                    val={this.state.beerNotes} />
                 <br/>
-                <input type="range" max="5" min="1" onChange={e => this.updateRating(e.target.value)} /><br/>
-                <i className="fa fa-star"></i> &nbsp;
-                <i className="fa fa-star"></i> &nbsp;
-                <i className="fa fa-star"></i> &nbsp;
-                <i className="fa fa-star"></i> &nbsp;
-                <i className="fa fa-star"></i>
+
+                <Rating change={e => this.updateRating(e.target.value)} />
                 <br/><br/>
+
                 <PourButton click={() => this.addBeer()} />
                 {list}
             </div>

@@ -6,14 +6,12 @@ import BeerList from './components/BeerList';
 
 class App extends Component {
 
-
   render() {
     return (
         <div className="App">
             <header className="App-header">
                 <Logo />
             </header>
-
             <div className="wrapper">
                 <div className="userList">
                     <h1>My Beers</h1>
@@ -24,7 +22,6 @@ class App extends Component {
                     <BeerLookup />
                 </div>
             </div>
-
         </div>
     );
   }

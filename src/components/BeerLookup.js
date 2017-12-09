@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import InputBox from './InputBox';
 import PourButton from './PourButton';
+import DisplayResults from './DisplayResults';
 
 class BeerLookup extends Component {
     constructor(){
@@ -23,7 +24,8 @@ class BeerLookup extends Component {
     }
 
     getBeer(){
-        axios.get(`http://localhost:3535/api/beer/${this.state.userInput}`).then(response => {
+        axios.get(`http://localhost:3535/api/beer/${this.state.userInput}`)
+        .then(response => {
             if(response.data.hasOwnProperty('data')){
                 let {name, description, abv, labels, breweries} = response.data.data[0];
                 this.setState({
@@ -52,16 +54,24 @@ class BeerLookup extends Component {
     render(){
 
         return (
-            <div className="SearchBox">
-                <InputBox placeholder="Beer Name" value={this.state.userInput} className="input" onChange={e => this.updateInput(e.target.value)}/>
+            <div>
+                
+                <InputBox
+                    className="input"
+                    placeholder="Beer Name"
+                    value={this.state.userInput}
+                    onChange={e => this.updateInput(e.target.value)} />
+
                 <PourButton click={() => this.getBeer()} />
 
-                <div className="displayResults">
-                    <h2>{this.state.name} <small>{this.state.abv}</small></h2>
-                    <h4><a href={this.state.website}>{this.state.brewery}</a></h4>
-                    <p>{this.state.description}</p>
-                    <img alt="" src={this.state.image} className="beerLabel" />
-                </div>
+                <DisplayResults
+                    name={this.state.name}
+                    abv={this.state.abv}
+                    brewery={this.state.brewery}
+                    website={this.state.website}
+                    description={this.state.description}
+                    image={this.state.image} />
+
             </div>
         )
     }

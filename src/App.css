@@ -37,7 +37,7 @@ a {
     padding: 20px;
 }
 
-.input {
+.InputBox {
     line-height: 30px;
     padding: 5px 10px;
     font-size: 24px;
@@ -47,7 +47,7 @@ a {
     margin: 0 auto;
 }
 
-.displayResults {
+.DisplayResults {
     text-align: center;
     margin: 0 auto;
 }
@@ -72,7 +72,7 @@ button {
     margin: 20px auto;
 }
 
-.Textarea {
+.TextBox {
     line-height: 30px;
     padding: 5px 10px;
     font-size: 14px;
