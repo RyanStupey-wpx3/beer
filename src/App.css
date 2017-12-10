@@ -83,16 +83,38 @@ small {
     color: #777;
 }
 
-button {
+.PourButton {
     font-size: 18px;
     padding: 10px;
-    width: 150px;
-    margin: 10px;
+    width: 160px;
+    margin: 15px;
     border-radius: 20px;
     background-color: #5bc0de;
     color: #fff;
     outline: none;
     font-family: 'Bungee Hairline', sans-serif;
+}
+
+form {
+    position: relative;
+}
+
+.searchBtn {
+    height: 44px;
+    width: 44px;
+    position: absolute;
+    top: 0;
+    right: 68px;
+    border: none;
+    border-left: 1px solid #222222;
+    border-radius: 0 3px 3px 0;
+    background-color: #5bc0de;
+    color: #fff;
+    outline: none;
+}
+
+.beerLookupBox {
+    display: inline
 }
 
 .beerLabel {
@@ -149,4 +171,40 @@ footer {
     text-align: right;
     padding: 0 10px;
     box-sizing: border-box;
+}
+
+
+
+/*Rating Slider*/
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 20px 0px 15px 0;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #222, 0px 0px 1px #222;
+  background: #222;
+  border-radius: 1.3px;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 26px;
+  width: 10px;
+  border-radius: 3px;
+  background: #5bc0de;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -10px;
 }

@@ -11,7 +11,7 @@ class BeerList extends Component {
         this.state = {
             beerId: '',
             beerName: '',
-            beerRating: '5',
+            beerRating: '1',
             beerNotes: '',
             beers: [],
             update: false
@@ -53,7 +53,7 @@ class BeerList extends Component {
                     beers: response.data,
                     beerId: '',
                     beerName: '',
-                    beerRating: '5',
+                    beerRating: '1',
                     beerNotes: '',
                     update: false
                 })
@@ -67,7 +67,7 @@ class BeerList extends Component {
                         beers: response.data,
                         beerId: '',
                         beerName: '',
-                        beerRating: '5',
+                        beerRating: '1',
                         beerNotes: '',
                         update: false
                     })
@@ -114,7 +114,7 @@ class BeerList extends Component {
         return (
             <div>
                 <InputBox
-                    className="input"
+                    class="InputBox"
                     placeholder="Beer Name"
                     val={this.state.beerName}
                     onChange={e => this.updateInput(e.target.value)} />

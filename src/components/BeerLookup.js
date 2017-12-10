@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import InputBox from './InputBox';
-import PourButton from './PourButton';
 import DisplayResults from './DisplayResults';
 
 class BeerLookup extends Component {
@@ -23,9 +22,12 @@ class BeerLookup extends Component {
         this.setState({ userInput: val })
     }
 
-    getBeer(){
+    getBeer(e){
+        e.preventDefault();
+        console.log('click');
         axios.get(`http://localhost:3535/api/beer/${this.state.userInput}`)
         .then(response => {
+            console.log('promise returned');
             if(response.data.hasOwnProperty('data')){
                 let {name, description, abv, labels, breweries} = response.data.data[0];
                 this.setState({
@@ -55,14 +57,15 @@ class BeerLookup extends Component {
 
         return (
             <div>
-                
-                <InputBox
-                    className="input"
-                    placeholder="Beer Name"
-                    value={this.state.userInput}
-                    onChange={e => this.updateInput(e.target.value)} />
+                <form>
+                    <InputBox
+                        class="InputBox beerLookupBox"
+                        placeholder="Beer Name"
+                        value={this.state.userInput}
+                        onChange={e => this.updateInput(e.target.value)} />
 
-                <PourButton click={() => this.getBeer()} />
+                    <button className="searchBtn" onClick={(e) => this.getBeer(e)}><i className="fa fa-search"></i></button>
+                </form>
 
                 <DisplayResults
                     name={this.state.name}

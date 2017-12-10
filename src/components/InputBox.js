@@ -3,7 +3,7 @@ import React from 'react';
 const InputBox = (props) => {
     return (
         <input
-            className="InputBox"
+            className={props.class}
             placeholder={props.placeholder}
             value={props.val}
             onChange={props.onChange} />
