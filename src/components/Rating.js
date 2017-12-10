@@ -6,13 +6,14 @@ const Rating = (props) => {
             <input
                 type="range"
                 max="5" min="1"
-                onChange={props.change} />
+                onChange={props.change}
+                value={props.val} />
             <br/>
-            <i className="fa fa-star"></i> &nbsp;
-            <i className="fa fa-star"></i> &nbsp;
-            <i className="fa fa-star"></i> &nbsp;
-            <i className="fa fa-star"></i> &nbsp;
-            <i className="fa fa-star"></i>
+            <i className={props.val > 0 ? 'fa fa-star yellow' : 'fa fa-star'}></i> &nbsp;
+            <i className={props.val > 1 ? 'fa fa-star yellow' : 'fa fa-star'}></i> &nbsp;
+            <i className={props.val > 2 ? 'fa fa-star yellow' : 'fa fa-star'}></i> &nbsp;
+            <i className={props.val > 3 ? 'fa fa-star yellow' : 'fa fa-star'}></i> &nbsp;
+            <i className={props.val > 4 ? 'fa fa-star yellow' : 'fa fa-star'}></i>
         </div>
     )
 }

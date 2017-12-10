@@ -22,6 +22,9 @@ class App extends Component {
                     <BeerLookup />
                 </div>
             </div>
+            <footer>
+                <Logo />
+            </footer>
         </div>
     );
   }

@@ -53,7 +53,7 @@ class BeerList extends Component {
                     beers: response.data,
                     beerId: '',
                     beerName: '',
-                    beerRating: '',
+                    beerRating: '5',
                     beerNotes: '',
                     update: false
                 })
@@ -67,7 +67,7 @@ class BeerList extends Component {
                         beers: response.data,
                         beerId: '',
                         beerName: '',
-                        beerRating: '',
+                        beerRating: '5',
                         beerNotes: '',
                         update: false
                     })
@@ -94,11 +94,12 @@ class BeerList extends Component {
             if(this.state.beers.length > 1 && i > 0){
                 return (
                     <div key={i}>
-                        <h3>
-                            {beer.name} <i className="fa fa-star"></i> {beer.rating}
+                        <h2>
+                            <span className="beerName">{beer.name}</span> <i className="fa fa-star yellow"></i> {beer.rating}
                             <span onClick={() => this.updateBeer(beer.id, beer.name, beer.rating, beer.notes)}> <i className="fa fa-pencil"></i></span>
-                        </h3>
-                        <h5 className="text-left">Notes: <span className="light">{beer.notes}</span></h5>
+                        </h2>
+                        <span className="label">Notes: </span><br/>
+                        <h5 className="beer-notes">{beer.notes}</h5>
                     </div>
                 )
             } else if(this.state.beers.length === 1){
@@ -123,13 +124,14 @@ class BeerList extends Component {
                     onChange={e => this.updateNotes(e.target.value)}
                     placeholder="Notes about this beer...."
                     val={this.state.beerNotes} />
-                <br/>
 
-                <Rating change={e => this.updateRating(e.target.value)} />
-                <br/><br/>
-
-                <PourButton click={() => this.addBeer()} />
-                {list}
+                <div className="rating-wrapper">
+                    <Rating change={e => this.updateRating(e.target.value)} val={this.state.beerRating} />
+                    <PourButton click={() => this.addBeer()} />
+                </div>
+                <div className="beer-list">
+                    {list}
+                </div>
             </div>
         )
     }
