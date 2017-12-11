@@ -33,7 +33,7 @@ class ListAndLookup extends Component {
 
     componentDidMount(){
         axios.get( `http://localhost:3535/api/mybeers` )
-        .then( response => { this.setState({ beerList: response.data }) })
+        .then( response => { this.setState({ beerList: [response.data] }) })
         .catch(err => console.log('Error: ' + err));
     }
 
@@ -216,7 +216,7 @@ class ListAndLookup extends Component {
     }
 
     removeBeer(id){
-        axios.delete( `http://localhost:3535/api/mybeers/:id`)
+        axios.delete( `http://localhost:3535/api/mybeers/${id}`)
         .then( response => {
             this.setState({
                 beerList: response.data,

@@ -34,9 +34,10 @@ module.exports = {
 
     delete(req, res){
         const beerId = req.params.id;
+        console.log(beerId);
         const index = beers.findIndex(beer => beer.id === parseInt(beerId, 10));
         beers.splice(index, 1);
-        res.status(200).json(beers);
+        res.json(beers);
     }
 
 }
