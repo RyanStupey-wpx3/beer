@@ -18,8 +18,12 @@ app.delete('/api/mybeers/:id', controller.delete);
 
 // External API Passthrough
 app.get('/api/beer/:name', (req, res) => {
-    console.log('here');
     axios.get(`https://api.brewerydb.com/v2/beers/?name=${req.params.name}&withBreweries=Y&key=${process.env.BING_KEY}`)
+    .then( response => res.json(response.data) ).catch(err => console.log('Error: ' + err));
+})
+
+app.get('/api/breweries/:name', (req, res) => {
+    axios.get(`https://api.brewerydb.com/v2/breweries/?name=${req.params.name}&key=${process.env.BING_KEY}`)
     .then( response => res.json(response.data) ).catch(err => console.log('Error: ' + err));
 })
 

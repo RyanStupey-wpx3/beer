@@ -9,6 +9,7 @@ import Rating from './components/Rating';
 import Button from './components/Button';
 import SearchButton from './components/SearchButton';
 import Quote from './components/Quote';
+import Brewery from './components/Brewery';
 
 class App extends Component {
 
@@ -28,7 +29,8 @@ class App extends Component {
             website: '',
             icon: '',
             beerList: [],
-            update: false
+            update: false,
+            breweryData: ''
         }
     }
 
@@ -46,33 +48,61 @@ class App extends Component {
     //Get beer from BreweryDB
     getBeer(e){
         e.preventDefault();
-        axios.get(`http://localhost:3535/api/beer/${this.state.searchInput}`)
-        .then(response => {
-            //Check for return data
-            if(response.data.hasOwnProperty('data')){
-                let {name, description, abv, labels, breweries} = response.data.data[0];
-                //Check if label exists
-                labels = labels && labels.hasOwnProperty('medium') ? labels.medium : ''
+        let radios = document.getElementsByName('searchType');
+        if(radios[0].checked){
+
+            //Get beer
+            axios.get(`http://localhost:3535/api/beer/${this.state.searchInput}*`)
+            .then(response => {
+                //Check for return data
+                if(response.data.hasOwnProperty('data')){
+                    let {name, description, abv, labels, breweries} = response.data.data[0];
+                    //Check if label exists
+                    labels = labels && labels.hasOwnProperty('medium') ? labels.medium : ''
+                    this.setState({
+                        searchInput: '',
+                        name: name,
+                        description: description,
+                        abv: abv + ' abv',
+                        image: labels,
+                        brewery: breweries[0].name,
+                        website: breweries[0].website,
+                        breweryData: ''
+                    })
+                } else {
+                    this.setState({
+                        name: 'Beer not found',
+                        description: '',
+                        abv: '',
+                        image: '',
+                        brewery: '',
+                        website: '',
+                        breweryData: ''
+                    })
+                }
+            }).catch(err => console.log('Error: ' + err));
+
+        } else {
+
+            //Get Brewery
+            axios.get(`http://localhost:3535/api/breweries/${this.state.searchInput}*`)
+            .then(response => {
                 this.setState({
-                    searchInput: '',
-                    name: name,
-                    description: description,
-                    abv: abv + ' abv',
-                    image: labels,
-                    brewery: breweries[0].name,
-                    website: breweries[0].website
-                })
-            } else {
-                this.setState({
-                    name: 'Beer not found',
+                    breweryData: response.data.data[0],
+                    name: '',
                     description: '',
                     abv: '',
                     image: '',
                     brewery: '',
-                    website: ''
+                    website: '',
                 })
-            }
-        }).catch(err => console.log('Error: ' + err));
+            }).catch(err => console.log('Error: ' + err));
+
+        }
+
+
+
+
     }
 
     //Update state on user input
@@ -213,6 +243,10 @@ class App extends Component {
 
                             <SearchButton
                                 click={(e) => this.getBeer(e)} />
+
+                            <br/>
+                            <input type="radio" name="searchType" value="beer" defaultChecked />Beer &nbsp;
+                            <input type="radio" name="searchType" value="brewery" />Brewery
                         </form>
                         <DisplayResults
                             name={this.state.name}
@@ -221,6 +255,8 @@ class App extends Component {
                             website={this.state.website}
                             description={this.state.description}
                             image={this.state.image} />
+
+                        <Brewery data={this.state.breweryData} />
 
                         <Button click={() => this.transfer()} text="Add to my list" class={active} />
                     </div>
