@@ -6,8 +6,9 @@ import InputBox from './components/InputBox';
 import DisplayResults from './components/DisplayResults';
 import TextBox from './components/TextBox';
 import Rating from './components/Rating';
-import PourButton from './components/PourButton';
+import Button from './components/Button';
 import SearchButton from './components/SearchButton';
+import Quote from './components/Quote';
 
 class App extends Component {
 
@@ -134,7 +135,16 @@ class App extends Component {
         })
     }
 
+    transfer(){
+        this.setState({
+            userName: this.state.name,
+            userNotes: this.state.description
+        })
+    }
+
     render() {
+
+        let active = this.state.name ? '' : 'hidden';
 
         //Prepare beer entries for display
         let list = this.state.beerList.map((beer,i) => {
@@ -164,6 +174,9 @@ class App extends Component {
                 <header className="App-header">
                     <Logo />
                 </header>
+                <div className="Quote">
+                    <Quote />
+                </div>
                 <div className="wrapper">
                     <div className="userList">
                         <h1>My Beers</h1>
@@ -181,7 +194,7 @@ class App extends Component {
 
                         <div className="rating-wrapper">
                             <Rating change={e => this.updateRating(e.target.value)} val={this.state.userRating} />
-                            <PourButton click={() => this.addBeer()} />
+                            <Button click={() => this.addBeer()} text="Pour" />
                         </div>
                         <div className="beer-list">
                             {list}
@@ -206,6 +219,8 @@ class App extends Component {
                             website={this.state.website}
                             description={this.state.description}
                             image={this.state.image} />
+
+                        <Button click={() => this.transfer()} text="Add to my list" class={active} />
                     </div>
                 </div>
                 <footer>

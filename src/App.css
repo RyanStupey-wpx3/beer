@@ -1,6 +1,6 @@
 .App {
     text-align: center;
-    background: #fff url('./background.jpg') center center no-repeat;
+    background: #222 url('./background.jpg') center center no-repeat;
     background-size: cover;
     font-family: 'Bungee Hairline', sans-serif;
 }
@@ -11,6 +11,10 @@ h1, h2 {
 
 small {
     font-family: 'Bungee Hairline', sans-serif;
+}
+
+.hidden {
+    display: none;
 }
 
 .App-header {
@@ -39,10 +43,19 @@ a {
 
 .wrapper{
     max-width: 1000px;
+    min-height: calc(100vh - 185px);
     display: flex;
     justify-content: center;
     background-color: rgba(255, 255, 255, .9);
-    margin: -20px auto;
+    margin: 0 auto -22px auto;
+}
+
+.Quote {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, .9);
+    max-width: 1000px;
+    margin: -20px auto 0 auto;
 }
 
 .userList {
@@ -57,7 +70,7 @@ a {
 
 .beerLookup {
     flex:1;
-    min-height: calc(100vh - 168px);
+    /*min-height: 100vh;*/
     padding: 20px;
 }
 
@@ -84,10 +97,10 @@ small {
     color: #777;
 }
 
-.PourButton {
+.Button {
     font-size: 18px;
     padding: 10px;
-    width: 160px;
+    min-width: 160px;
     margin: 15px;
     border-radius: 20px;
     background-color: #5bc0de;
