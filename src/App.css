@@ -1,6 +1,6 @@
 .App {
     text-align: center;
-    background: #222 url('./background.jpg') center center no-repeat;
+    background: #222 url('./background.jpg') center center;
     background-size: cover;
     font-family: 'Bungee Hairline', sans-serif;
 }
@@ -117,7 +117,7 @@ form {
     width: 44px;
     position: absolute;
     top: 0;
-    right: 68px;
+    right: 48px;
     border: none;
     border-left: 1px solid #222222;
     border-radius: 0 3px 3px 0;

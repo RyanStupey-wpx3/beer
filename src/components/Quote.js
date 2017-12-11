@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-const quoteList = ['Life is too short to drink bad beer.', 'Beauty is in the eye of the beer holder.', 'Beer. Now there\'s a temporary solution.', 'Beer makes me hoppy.', 'Life is brewtiful','Beer- Because you can\'t drink bacon.', 'Today\'s soup is beer.'];
+const quoteList = ['Life is too short to drink cheap beer.', 'Beauty is in the eye of the beer holder.', 'Beer. Now there\'s a temporary solution.', 'Beer makes me hoppy.', 'Life is brewtiful','Beer- Because you can\'t drink bacon.', 'Today\'s soup is beer.'];
 
 class Quote extends Component {
     constructor(){

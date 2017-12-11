@@ -50,53 +50,105 @@ class App extends Component {
         e.preventDefault();
         let radios = document.getElementsByName('searchType');
         if(radios[0].checked){
-
             //Get beer
-            axios.get(`http://localhost:3535/api/beer/${this.state.searchInput}*`)
-            .then(response => {
-                //Check for return data
-                if(response.data.hasOwnProperty('data')){
-                    let {name, description, abv, labels, breweries} = response.data.data[0];
-                    //Check if label exists
-                    labels = labels && labels.hasOwnProperty('medium') ? labels.medium : ''
+            if(this.state.searchInput){
+                axios.get(`http://localhost:3535/api/beer/${this.state.searchInput}*`)
+                .then(response => {
+                    //Check for return data
+                    if(response.data.hasOwnProperty('data')){
+                        let {name, description, abv, labels, breweries} = response.data.data[0];
+                        //Check if label exists
+                        labels = labels && labels.hasOwnProperty('medium') ? labels.medium : ''
+                        this.setState({
+                            searchInput: '',
+                            name: name,
+                            description: description,
+                            abv: abv + ' abv',
+                            image: labels,
+                            brewery: breweries[0].name,
+                            website: breweries[0].website,
+                            breweryData: ''
+                        })
+                    } else {
+                        this.setState({
+                            name: 'Beer not found',
+                            description: '',
+                            abv: '',
+                            image: '',
+                            brewery: '',
+                            website: '',
+                            breweryData: ''
+                        })
+                    }
+                }).catch(err => console.log('Error: ' + err));
+            } else {
+                //Random beer
+                axios.get(`http://localhost:3535/api/beer/random/random`)
+                .then(response => {
+                    //Check for return data
+                    console.log(response);
+                    if(response.data.hasOwnProperty('data')){
+                        let {name, description, abv, labels, breweries} = response.data.data;
+                        //Check if label exists
+                        labels = labels && labels.hasOwnProperty('medium') ? labels.medium : ''
+                        this.setState({
+                            searchInput: '',
+                            name: name,
+                            description: description,
+                            abv: abv + ' abv',
+                            image: labels,
+                            brewery: breweries[0].name,
+                            website: breweries[0].website,
+                            breweryData: ''
+                        })
+                    } else {
+                        this.setState({
+                            name: 'Beer not found',
+                            description: '',
+                            abv: '',
+                            image: '',
+                            brewery: '',
+                            website: '',
+                            breweryData: ''
+                        })
+                    }
+                }).catch(err => console.log('Error: ' + err));
+            }
+
+
+
+        } else {
+
+            //Get Brewery
+            if(this.state.searchInput){
+                axios.get(`http://localhost:3535/api/breweries/${this.state.searchInput}*`)
+                .then(response => {
                     this.setState({
-                        searchInput: '',
-                        name: name,
-                        description: description,
-                        abv: abv + ' abv',
-                        image: labels,
-                        brewery: breweries[0].name,
-                        website: breweries[0].website,
-                        breweryData: ''
-                    })
-                } else {
-                    this.setState({
-                        name: 'Beer not found',
+                        breweryData: response.data.data[0],
+                        name: '',
                         description: '',
                         abv: '',
                         image: '',
                         brewery: '',
                         website: '',
-                        breweryData: ''
                     })
-                }
-            }).catch(err => console.log('Error: ' + err));
+                }).catch(err => console.log('Error: ' + err));
+            } else {
+                //Random brewery
+                axios.get(`http://localhost:3535/api/brewery/random/random`)
+                .then(response => {
+                    this.setState({
+                        breweryData: response.data.data,
+                        name: '',
+                        description: '',
+                        abv: '',
+                        image: '',
+                        brewery: '',
+                        website: '',
+                    })
+                }).catch(err => console.log('Error: ' + err));
+            }
 
-        } else {
-
-            //Get Brewery
-            axios.get(`http://localhost:3535/api/breweries/${this.state.searchInput}*`)
-            .then(response => {
-                this.setState({
-                    breweryData: response.data.data[0],
-                    name: '',
-                    description: '',
-                    abv: '',
-                    image: '',
-                    brewery: '',
-                    website: '',
-                })
-            }).catch(err => console.log('Error: ' + err));
 
         }
 
@@ -257,14 +309,13 @@ class App extends Component {
                         <form>
                             <InputBox
                                 class="InputBox beerLookupBox"
-                                placeholder="Beer Name"
+                                placeholder="Leave blank for random"
                                 value={this.state.searchInput}
                                 onChange={e => this.updateInput(e.target.value)} />
 
                             <SearchButton
                                 click={(e) => this.getBeer(e)} />
 
-                            <br/>
                             <input type="radio" name="searchType" value="beer" defaultChecked />Beer &nbsp;
                             <input type="radio" name="searchType" value="brewery" />Brewery
                         </form>

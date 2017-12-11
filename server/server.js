@@ -22,8 +22,20 @@ app.get('/api/beer/:name', (req, res) => {
     .then( response => res.json(response.data) ).catch(err => console.log('Error: ' + err));
 })
 
+app.get('/api/beer/random/random', (req, res) => {
+    axios.get(`https://api.brewerydb.com/v2/beer/random?withBreweries=Y&key=${process.env.BING_KEY}`)
+    .then( response => {
+        res.json(response.data)
+    } ).catch(err => console.log('Error: ' + err));
+})
+
 app.get('/api/breweries/:name', (req, res) => {
     axios.get(`https://api.brewerydb.com/v2/breweries/?name=${req.params.name}&key=${process.env.BING_KEY}`)
+    .then( response => res.json(response.data) ).catch(err => console.log('Error: ' + err));
+})
+
+app.get('/api/brewery/random/random', (req, res) => {
+    axios.get(`https://api.brewerydb.com/v2/brewery/random?key=${process.env.BING_KEY}`)
     .then( response => res.json(response.data) ).catch(err => console.log('Error: ' + err));
 })
 
