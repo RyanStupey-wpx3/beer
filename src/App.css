@@ -80,8 +80,7 @@ a {
     font-size: 16px;
     width: 300px;
     border: 2px solid #333;
-    display: block;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     background-color: #222;
     outline: none;
     border-radius: 3px;
@@ -172,6 +171,10 @@ input::placeholder {
     align-items: center;
 }
 
+.pointer{
+    cursor: pointer;
+}
+
 .beerName {
     font-family: 'Bungee', sans-serif;
     border-bottom: 4px solid #d9c725;
@@ -209,6 +212,7 @@ input[type=range]::-webkit-slider-runnable-track {
   background: #222;
   border-radius: 1.3px;
   outline: none;
+   -webkit-appearance: none;
 }
 
 input[type=range]::-webkit-slider-thumb {

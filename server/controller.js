@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const beers = ['Add some beers to your list'];
 let id = 100;
 

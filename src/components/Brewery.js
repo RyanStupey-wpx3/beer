@@ -1,29 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class Brewery extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            brewery: '',
-            name: '',
-            image: '',
-            established: '',
-            description: '',
-            classification: ''
-        }
-    }
+const Brewery = (props) => {
 
+    let active = props.data.name ? '' : 'hidden';
+    let est = props.data.established ? `<h3>Est ${props.data.established}</h3>` : '';
+    
+    return (
+        <div className={active}>
+            <h2>{props.data.name}</h2>
+            {est}
+            <p>{props.data.description}</p>
+        </div>
+    )
 
-    render(){
-        let active = this.props.data.name ? '' : 'hidden';
-        return (
-            <div className={active}>
-                <h2>{this.props.data.name}</h2>
-                <h3>{this.props.data.established}</h3>
-                <p>Est. {this.props.data.description}</p>
-            </div>
-        )
-    }
 }
 
 export default Brewery;

@@ -167,6 +167,20 @@ class App extends Component {
         })
     }
 
+    removeBeer(id){
+        axios.delete( `http://localhost:3535/api/mybeers/:id`)
+        .then( response => {
+            this.setState({
+                beerList: response.data,
+                id: '',
+                userName: '',
+                userRating: '1',
+                userNotes: '',
+                update: false
+            })
+        }).catch(err => console.log('Error: ' + err));
+    }
+
     transfer(){
         this.setState({
             userName: this.state.name,
@@ -186,8 +200,14 @@ class App extends Component {
                     <div key={i}>
                         <h2>
                             <span className="beerName">{beer.name}</span> <i className="fa fa-star yellow"></i> {beer.rating}
-                            <span onClick={() => this.updateBeer(beer.id, beer.name, beer.rating, beer.notes)}> <i className="fa fa-pencil"></i></span>
+
                         </h2>
+                        <span className="pointer" onClick={() => this.updateBeer(beer.id, beer.name, beer.rating, beer.notes)}>
+                            <i className="fa fa-pencil"></i> Edit
+                        </span> &nbsp;
+                        <span className="pointer" onClick={() => this.removeBeer(beer.id)}>
+                            <i className="fa fa-trash"></i> Delete
+                        </span><br/><br/>
                         <span className="label">Notes: </span><br/>
                         <h5 className="beer-notes">{beer.notes}</h5>
                     </div>
