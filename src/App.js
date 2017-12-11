@@ -51,12 +51,14 @@ class App extends Component {
             //Check for return data
             if(response.data.hasOwnProperty('data')){
                 let {name, description, abv, labels, breweries} = response.data.data[0];
+                //Check if label exists
+                labels = labels && labels.hasOwnProperty('medium') ? labels.medium : ''
                 this.setState({
                     searchInput: '',
                     name: name,
                     description: description,
                     abv: abv + ' abv',
-                    image: labels.medium,
+                    image: labels,
                     brewery: breweries[0].name,
                     website: breweries[0].website
                 })
