@@ -51,6 +51,7 @@ a {
 }
 
 .beer-list {
+    margin-top: -50px;
     padding: 60px;
 }
 
@@ -99,7 +100,7 @@ form {
     position: relative;
 }
 
-.searchBtn {
+.SearchButton {
     height: 44px;
     width: 44px;
     position: absolute;
