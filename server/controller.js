@@ -13,11 +13,11 @@ module.exports = {
             notes: req.body.notes
         })
         id++;
-        res.json(beers);
+        res.status(200).json(beers);
     },
 
     read(req, res){
-        res.json(beers);
+        res.status(200).json(beers);
     },
 
     update(req, res){
@@ -29,14 +29,14 @@ module.exports = {
             rating: req.body.rating,
             notes: req.body.notes
         }
-        res.json(beers);
+        res.status(200).json(beers);
     },
 
     delete(req, res){
         const beerId = req.params.id;
         const index = beers.findIndex(beer => beer.id === parseInt(beerId, 10));
         beers.splice(index, 1);
-        res.json(beers);
+        res.status(200).json(beers);
     }
 
 }
